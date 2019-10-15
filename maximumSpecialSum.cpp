@@ -31,8 +31,7 @@ int testSpecial(long int a[],long int n,long int k ,long int s){
 }
 
 int main() {
-	// your code goes here
-	long int n, s,i, j, k,res=0, value,ind, foo;
+	long int n, s,i, j, k, res=0, value, ind, foo;
     cin >> n;
     cin >> k;
     cin >> s;
