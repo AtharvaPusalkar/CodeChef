@@ -11,7 +11,7 @@
 #define EB emplace_back
 #define endl "\n"
 #define FOR(i,a,b) for (long long i = a; i < b; i++)
-#define REV(i,a,b) for (long long i = a; i >= b; i--)
+#define REV(i,a,b) for (long long i = a; i > b; i--)
 #define mset(a, v) memset(a, v, sizeof(a))
 typedef std::pair<int, int> pii;
 typedef std::vector<long long> vi;
@@ -26,7 +26,25 @@ int main() {
     int t;
     cin >> t;
     while(t--) {
-
+        ll M,N;
+        cin >> N >> M;
+        ll F[N], P[N];
+        FOR(i,0,N) {
+            cin >> F[i];
+        }
+        FOR(i,0,N) {
+            cin >> P[i];
+        }
+        unordered_map<ll,ll>mp;
+        FOR(i,0,N) {
+            mp[F[i]] += P[i];
+        }
+        ll res = MAX;
+        FOR(i,0,N) {
+//            cout << F[i] << "->" << mp[F[i]] << endl;
+            res = min(res,mp[F[i]]);
+        }
+        cout << res << endl;
     }
     return 0;
 }

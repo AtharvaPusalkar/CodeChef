@@ -3,7 +3,6 @@
 #define INF 2e9
 #define EPS 1e-9
 #define MAX LLONG_MAX
-#define MIN LLONG_MIN
 #define F first
 #define S second
 #define MP make_pair
@@ -11,11 +10,10 @@
 #define EB emplace_back
 #define endl "\n"
 #define FOR(i,a,b) for (long long i = a; i < b; i++)
-#define REV(i,a,b) for (long long i = a; i >= b; i--)
+#define REV(i,a,b) for (long long i = a; i > b; i--)
 #define mset(a, v) memset(a, v, sizeof(a))
 typedef std::pair<int, int> pii;
 typedef std::vector<long long> vi;
-typedef std::vector<vi> vvi;
 typedef long long ll;
 typedef unsigned long long ull;
 using namespace std;
@@ -26,7 +24,18 @@ int main() {
     int t;
     cin >> t;
     while(t--) {
-
+        ll N;
+        ll a,b,c;
+        cin >> N >> a >> b >> c;
+        ll F[N];
+        FOR(i,0,N) {
+            cin >> F[i];
+        }
+        ll res = MAX;
+        FOR(i,0,N) {
+            res = min(res,abs(F[i]-b)+c+abs(F[i]-a));
+        }
+        cout << res << endl;
     }
     return 0;
 }

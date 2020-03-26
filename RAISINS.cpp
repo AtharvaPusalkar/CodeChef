@@ -11,7 +11,7 @@
 #define EB emplace_back
 #define endl "\n"
 #define FOR(i,a,b) for (long long i = a; i < b; i++)
-#define REV(i,a,b) for (long long i = a; i >= b; i--)
+#define REV(i,a,b) for (long long i = a; i > b; i--)
 #define mset(a, v) memset(a, v, sizeof(a))
 typedef std::pair<int, int> pii;
 typedef std::vector<long long> vi;
@@ -23,10 +23,20 @@ using namespace std;
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
-    int t;
-    cin >> t;
-    while(t--) {
-
+    ll W,H,R;
+    cin >> W,H,R;
+    ll X,Y;
+    FOR(i,0,R) {
+        cin >> X >> Y;
     }
+    cout << 30 << " " << 30 << " " << 0 << endl;
+    // FOR(i,0,30) {
+    //     cout << 1 << " " << i+1 << endl;
+    //     i++;
+    // }
+    // FOR(i,0,30) {
+    //     cout << 2 << " " << i+1 << endl;
+    //     i++;
+    // }
     return 0;
 }
