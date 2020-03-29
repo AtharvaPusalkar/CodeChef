@@ -44,7 +44,7 @@ struct segtree {
 
 	void upd(int l1, int r1, ll x, int i=1, int l2=0, int r2=n) {
 		if(l1<=l2&&r2<=r1) {
-			app(i, x); // current node is a leaf node
+			app(i, x); // update only the current node
 			return;
 		}
 		int m2=(l2+r2)/2;
@@ -57,23 +57,8 @@ struct segtree {
 		b[i] = max(b[2*i], b[2*i+1]);
 	}
 
-	void updIndex(int ind, int x, int i=1, int l2=0, int r2=n) {
-		if(l2==r2) {
-			app(i, x); // current node is a leaf node
-			return;
-		}
-		int m2=(l2+r2)/2;
-		psh(i);
-		if(ind<=m2) {
-			updIndex(ind, x, 2*i, l2, m2);
-		}else {
-			updIndex(ind, x, 2*i+1, m2+1, r2);
-		}
-		a[i] = a[2*i] + a[2*i+1];
-		b[i] = max(b[2*i], b[2*i+1]);
-	}
-
 	ll range_max(int l1, int r1, int i=1, int l2=0, int r2=n) {
+	   // if(r1 == 0)return 0LL;
 		if(l1<=l2&&r2<=r1)
 			return b[i];
 		int m2=(l2+r2)/2;
@@ -102,18 +87,19 @@ int main() {
 	while(t--) {
         int q;
         cin >> n >> q;
-		for(int i=0; i<n; ++i)
+		ll pre[n];
+		for(int i=0; i<n; ++i) {
 			cin >> b[i];
-
+		}
+		pre[0] = b[0];
+		FOR(i,1,n) {
+			pre[i] = pre[i-1] + b[i];
+		}
 		segtree sr, sl;
 		//init segtrees
-		int last = 0;
 		for(int i=0; i<n; ++i) {
-			// sr.upd(i+1, n, b[i]+last);
-			// sl.upd(i+1, n, -(b[i]+last));
-			sr.updIndex(i+1, last+b[i]);
-			sl.updIndex(i+1, -(last+b[i]));
-			last += b[i];
+			sr.upd(i+1,i+1, pre[i]);
+			sl.upd(i+1,i+1, -pre[i]);
 		}
 
 		//queries
@@ -122,7 +108,7 @@ int main() {
 			cin >> qt >> x >> y;
 			if(qt=='Q') {
 				//max suffix - min prefix
-				cout << sr.range_max(y, n)+sl.range_max(0, x-1) << "\n";
+				cout << sr.range_max(y, n) +  max(0LL , sl.range_max(1, x-1)) << "\n";
 			} else {
 				sr.upd(x, n, y-b[x-1]);
 				sl.upd(x, n, b[x-1]-y);
